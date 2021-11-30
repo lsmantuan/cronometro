@@ -1,0 +1,102 @@
+@charset "UTF8";
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;300;400;700&display=swap');
+
+@font-face { 
+    font-family: 'Mantuan';
+    src: url(fonts/mantuan.ttf);
+}
+
+body {
+    background-color: rgb(230, 185, 30);
+    font-size: 16px;
+}
+
+.botao {
+    font-family: 'Mantuan';
+    font-size: 1.82em;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    border-width: 0;
+    padding: 5px 0 0 5px;
+    background-color: rgb(210, 165, 25);
+    box-shadow: rgb(165, 130, 20) 5px 5px;
+    color: rgb(0, 0, 0);
+    margin: 0 2% 0 0;
+}
+
+.botao:hover {
+    box-shadow: rgb(165, 130, 20) 5px 5px, rgb(240, 215, 120) 0 0 60px;
+}
+
+.botao:active {
+    background-color: rgb(190, 145, 20);
+    box-shadow: rgb(165, 130, 20) 1px 1px;
+}
+
+.titulo {
+    font-family: 'Roboto Mono', 'Arial';
+    color: rgb(165, 130, 20);
+    font-size: 0.8em;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 1.5em;
+    text-transform: uppercase;
+    margin: 5% 0 0 0;
+}
+
+.rodape {
+    font-family: 'Roboto Mono', 'Arial';
+    color: rgb(165, 130, 20);
+    font-size: 0.6em;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    margin: 2% 0 0 0;
+}
+
+.cronometro {
+    font-family: 'Roboto Mono', 'Arial';
+    font-weight: 100;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-size: 6em;
+    text-shadow: rgb(210, 165, 25) 5px 5px;
+}
+
+.controles {
+    text-align: center;
+    margin: 2% 0 0 0;
+}
+
+table {
+    font-family: 'Roboto Mono', 'Arial';
+    margin: 2% auto;
+    text-align: center;
+    border-spacing: 0;
+    border-radius: 20px;
+    width: 36%;
+}
+
+tr:nth-child(even) {
+    background-color: rgb(210, 165, 25);
+}
+
+td {
+    padding: 1.5%;
+    width: 12%;
+}
+
+td:first-child {
+    border-radius: 10px 0 0 10px;
+}
+
+td:last-child {
+    border-radius: 0 10px 10px 0;
+}
+
+.volta::before {
+    font-family: 'Mantuan';
+    content: '\1F6A9\0020';
+}

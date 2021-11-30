@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronômetro Simples</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <main>
+       <section>
+           <div class="titulo">Cronômetro</div>
+           <div class="cronometro">
+               <span id="horas">00</span>:<span id="minutos">00</span>:<span id="segundos">00</span>:<span id="centesimos">00</span>
+            </div>
+       </section>
+       <section>
+            <table>
+                <tbody id="voltas">
+                </tbody>
+            </table>
+       </section>
+       <section class="controles">
+           <input type="button" id="iniciar" class="botao" value="&#x25B6;">
+           <input type="button" id="pausar" class="botao" value="&#x23F8;">
+           <input type="button" id="parar" class="botao" value="&#x23F9;">
+           <input type="button" id="volta" class="botao" value="&#x1F6A9;">
+       </section>
+       <footer>
+        <p class="rodape">&copy; Lucas Mantuan</p>
+    </footer>
+   </main> 
+   <script src="script.js"></script>
+</body>
+</html>
