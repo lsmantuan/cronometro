@@ -2,11 +2,9 @@ var cronometro = 0;
 var centesimos = 0;
 var segundos = 0;
 var minutos = 0;
-var horas = 0;
 
 var view = {
     volta: 0,
-    segundosVolta: 0,
 
     alterarValor: function(id, valor) {
         var campo = document.getElementById(id);
@@ -17,17 +15,63 @@ var view = {
         }
     },
 
-    inserirVolta: function() {
+    inserirVolta: function(zerar) {
         var tabela = document.getElementById("voltas");
         this.volta++;
-       
-        this.segundosVolta = segundos - this.segundosVolta;
-        tabela.innerHTML += `<tr><td class="volta">${this.volta}</td><td>${horas.valueOf()}:${minutos.valueOf()}:${segundos.valueOf()}:${centesimos.valueOf()}</td><td>Teste</td></tr>`;
-        console.log(this.segundosVolta);
+        if (zerar) {
+            tabela.innerHTML = ""
+        } else {
+            tabela.innerHTML += `<tr>
+                                    <td class="volta">${this.volta}</td>
+                                    <td>${model.calculaTempoVolta()}</td>
+                                    <td>${view.adicionarZero(minutos)}:${view.adicionarZero(segundos)}.${view.adicionarZero(centesimos)}</td>
+                                </tr>`
+        };
+    },
+
+    estadoBotao: function(estado, botao) {
+        var botaoAlternar = document.getElementById(botao);
+        if (estado === "oculto") {
+            botaoAlternar.classList.add("oculto");       
+        } else if (estado == "aparente") {
+            botaoAlternar.classList.remove("oculto");       
+        }
+    },
+
+    adicionarZero: function(numero) {
+        if (numero < 10) {
+            return "0" + numero;
+        } else {
+            return numero;
+        }
     }
 };
 
 var model = {
+    centesimosVolta: 0,
+    segundosVolta: 0,
+    minutosVolta: 0,
+    
+    calculaTempoVolta: function() {
+        var tempoInicial = new Date(1970, 1, 1, 0, this.minutosVolta, this.segundosVolta, (this.centesimosVolta*10));
+        var tempoAtual = new Date(1970, 1, 1, 0, minutos, segundos, (centesimos*10)); 
+        var tempoVolta = (tempoAtual - tempoInicial) / 1000;
+
+        this.minutosVolta = minutos;
+        this.segundosVolta = segundos;
+        this.centesimosVolta = centesimos;
+
+        var centesimosExibicao = (tempoVolta - Math.trunc(tempoVolta)) * 100;
+        var segundosExibicao = Math.trunc(tempoVolta);
+        var minutosExibicao = 0;
+        
+        while (segundosExibicao > 60) {
+            segundosExibicao -= 60;
+            minutosExibicao++;
+        }
+        return view.adicionarZero(minutosExibicao) + ":" + view.adicionarZero(segundosExibicao) + "." + view.adicionarZero(centesimosExibicao.toFixed(0));
+    },
+
     passagemCentesimos: function() {
         centesimos++;
         if (centesimos > 99) {
@@ -48,16 +92,7 @@ var model = {
 
     passagemMinutos: function() {
         minutos++;
-        if (minutos > 59) {
-            minutos = 0;
-            model.passagemHoras();
-        };
         view.alterarValor("minutos", minutos);
-    },
-
-    passagemHoras: function() {
-        horas++;
-        view.alterarValor("horas", horas);
     }
 };
 
@@ -76,39 +111,46 @@ var controller = {
     },
 
     iniciar: function() {
-        controller.pausar();
+        clearInterval(cronometro);
         cronometro = setInterval(model.passagemCentesimos, 10);
+        view.estadoBotao("oculto", "iniciar");
+        view.estadoBotao("oculto", "parar");        
+        view.estadoBotao("aparente", "pausar");
+        view.estadoBotao("aparente", "volta");
     },
-
+    
     pausar: function() {
         clearInterval(cronometro);
+        view.estadoBotao("aparente", "iniciar");
+        view.estadoBotao("aparente", "parar");
+        view.estadoBotao("oculto", "pausar");
+        view.estadoBotao("oculto", "volta");
     },
 
     parar: function() {
-        controller.pausar();     
+        controller.pausar();
+        view.estadoBotao("aparente", "iniciar");
+        view.estadoBotao("oculto", "parar");
+        view.estadoBotao("oculto", "pausar");
+        view.estadoBotao("oculto", "volta");            
         view.alterarValor("centesimos", 0)
         view.alterarValor("segundos", 0)
         view.alterarValor("minutos", 0)
-        view.alterarValor("horas", 0)
+        view.inserirVolta(true);
         centesimos = 0;
         segundos = 0;
         minutos = 0;
         horas = 0;
+        view.volta = 0;
+        model.centesimosVolta = 0;
+        model.segundosVolta = 0;
+        model.minutosVolta = 0;
     },
 
     volta: function() {
         view.inserirVolta();
     }
 
-};
-
-Number.prototype.valueOf = function() {
-    var numeroFormatado = this.toString();
-    if (numeroFormatado < 9) {
-        return "0" + numeroFormatado;
-    } else {
-        return numeroFormatado;
-    }
 };
 
 window.onload = function() {

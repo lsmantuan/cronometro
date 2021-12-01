@@ -67,7 +67,7 @@ body {
 
 .controles {
     text-align: center;
-    margin: 2% 0 0 0;
+    margin: 0;
 }
 
 table {
@@ -99,4 +99,8 @@ td:last-child {
 .volta::before {
     font-family: 'Mantuan';
     content: '\1F6A9\0020';
+}
+
+.oculto {
+    display: none;
 }
