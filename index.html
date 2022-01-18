@@ -5,14 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cronômetro Simples</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
    <main>
        <section>
            <div class="titulo">Cronômetro</div>
            <div class="cronometro">
-               <span id="minutos">00</span>:<span id="segundos">00</span>.<span id="centesimos">00</span>
+               <span id="minutos">00</span>
+               <span class="divisaosegundo">:</span>
+               <span id="segundos">00</span>
+               <span class="divisaocentesimo">.</span>
+               <span id="centesimos">00</span>
             </div>
        </section>
        <section class="controles">
@@ -31,6 +35,6 @@
         <p class="rodape">&copy; Lucas Mantuan</p>
     </footer>
    </main> 
-   <script src="script.js"></script>
+   <script src="js/script.js"></script>
 </body>
 </html>
