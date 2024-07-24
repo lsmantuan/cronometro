@@ -1,3 +1,3 @@
 # Cronômetro
 
-Neste projeto, utilizei o objeto Date() do JS, principalmente na função que calcula o tempo das voltas. Continuei aplicando os conceitos de MVC e POO. Saliento que procurei aplicar em todos os projetos estes conceitos.
+Durante a fase de estudos de frontend, foram desenvolvidos vários projetos, como um Catálogo de Livros, uma Calculadora de Índice de Massa Corporal, um Cronômetro e um Jogo da Memória. Todos utilizam a abordagem com ênfase no design responsivo.
